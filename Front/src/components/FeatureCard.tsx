@@ -16,7 +16,7 @@ export default function FeatureCard() {
 
   // 🔹 Récupérer les chats depuis l'API
   useEffect(() => {
-    fetch(`${API_BASE_URL}api/chats`) // 🔥 Mets l'URL correcte
+    fetch(`${API_BASE_URL}/api/chats`) // 🔥 Mets l'URL correcte
       .then((response) => response.json())
       .then((data) => setChats(data))
       .catch((error) =>
