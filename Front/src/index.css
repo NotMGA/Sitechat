@@ -5,7 +5,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 @import "tailwindcss";
 
-:root {
+@theme {
   --color-customGreen: #6baa9c;
   --color-customOrange: #f4a261;
   --color-customOrangehover: #b44d3b;
