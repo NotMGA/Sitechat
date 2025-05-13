@@ -7,7 +7,7 @@ type Chat = {
   nom: string;
   age: number;
   sexe: string;
-  photos: string[];
+  images: string[];
 };
 
 export default function FeatureCard() {
@@ -64,7 +64,7 @@ export default function FeatureCard() {
           <div
             className="w-full h-full rounded-full bg-cover bg-center relative"
             style={{
-              backgroundImage: `url(${currentCat.photos[0]})`, // 🔄 Change l’image
+              backgroundImage: `url(${currentCat.images[0]})`, // 🔄 Change l’image
               boxShadow: "inset 10px 10px 20px rgba(0,0,0,0.8)", // Ombre en haut à gauche
             }}
           ></div>
