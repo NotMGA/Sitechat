@@ -9,9 +9,9 @@ export default function AddForm({ onClose }: AddFormProps) {
   const [description, setDescription] = useState("");
   const [age, setAge] = useState<number | "">("");
   const [sexe, setSexe] = useState("M");
-  const [type_habitat, setTypeHabitat] = useState("Appartement");
+  const [typeHome, setTypeHabitat] = useState("Appartement");
   const [qualites, setQualites] = useState<string[]>([]);
-  const [prix_adoption, setPrixAdoption] = useState<number | "">("");
+  const [prixAdoption, setPrixAdoption] = useState<number | "">("");
   const [photos, setPhotos] = useState<string[]>([]);
   const [currentQualite, setCurrentQualite] = useState("");
   const [currentPhoto, setCurrentPhoto] = useState("");
@@ -40,8 +40,8 @@ export default function AddForm({ onClose }: AddFormProps) {
       age,
       image: photos[0] || "", // première photo comme image principale
       sexe,
-      type_habitat,
-      prix_adoption,
+      typeHome,
+      prixAdoption,
       photos, // tableau
     };
 
@@ -137,7 +137,7 @@ export default function AddForm({ onClose }: AddFormProps) {
           <div>
             <label className="block font-semibold">Habitat :</label>
             <select
-              value={type_habitat}
+              value={typeHome}
               onChange={(e) => setTypeHabitat(e.target.value)}
               className="w-full border p-2"
             >
@@ -200,7 +200,7 @@ export default function AddForm({ onClose }: AddFormProps) {
             <label className="block font-semibold">Prix adoption (€) :</label>
             <input
               type="number"
-              value={prix_adoption}
+              value={prixAdoption}
               onChange={(e) => setPrixAdoption(Number(e.target.value))}
               className="w-full border p-2"
               required
