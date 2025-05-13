@@ -1,98 +1,37 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../config/db");
-const verifyAdminToken = require("../middleware/auth"); // 🔹 Importer le middleware
+const Chat = require("../models/Chat");
+const verifyAdminToken = require("../middleware/auth");
 
-// 🔹 Récupérer tous les chats (Public)
-router.get("/", (req, res) => {
-  const sql = `
-    SELECT c.*, 
-           COALESCE(GROUP_CONCAT(p.url), '') AS photos 
-    FROM chats c
-    LEFT JOIN photos_chats p ON c.id = p.chat_id
-    GROUP BY c.id
-  `;
-
-  db.query(sql, (err, result) => {
-    if (err) return res.status(500).json({ error: err.message });
-
-    result.forEach((chat) => {
-      chat.qualities = chat.qualities ? JSON.parse(chat.qualities) : [];
-      chat.photos = chat.photos ? chat.photos.split(",") : [];
-    });
-
-    res.json(result);
-  });
+// 🔹 Récupérer tous les chats
+router.get("/", async (req, res) => {
+  try {
+    const chats = await Chat.find();
+    res.json(chats);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// 🔹 Ajouter un chat (Protégé)
-router.post("/", verifyAdminToken, (req, res) => {
-  const {
-    nom,
-    description,
-    qualites,
-    age,
-    image,
-    sexe,
-    type_habitat,
-    prix_adoption,
-    photos,
-  } = req.body;
-
-  const qualitesStr = JSON.stringify(qualites);
-
-  const sql =
-    "INSERT INTO chats (nom, description, qualites, age, image, sexe, type_habitat, prix_adoption) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-  db.query(
-    sql,
-    [
-      nom,
-      description,
-      qualitesStr,
-      age,
-      image,
-      sexe,
-      type_habitat,
-      prix_adoption,
-    ],
-    (err, result) => {
-      if (err) return res.status(500).json({ error: err.message });
-
-      const chatId = result.insertId;
-
-      if (photos && photos.length > 0) {
-        const photoValues = photos.map((url) => [chatId, url]);
-
-        db.query(
-          "INSERT INTO photos_chats (chat_id, url) VALUES ?",
-          [photoValues],
-          (photoErr) => {
-            if (photoErr)
-              return res.status(500).json({ error: photoErr.message });
-
-            res.json({ message: "Chat ajouté avec ses photos !", chatId });
-          }
-        );
-      } else {
-        res.json({ message: "Chat ajouté sans photos !", chatId });
-      }
-    }
-  );
+// 🔹 Ajouter un chat
+router.post("/", verifyAdminToken, async (req, res) => {
+  try {
+    const chat = new Chat(req.body);
+    await chat.save();
+    res.status(201).json({ message: "Chat ajouté", chat });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 
-// 🔹 Supprimer un chat (Protégé)
-router.delete("/:id", verifyAdminToken, (req, res) => {
-  const { id } = req.params;
-
-  db.query("DELETE FROM photos_chats WHERE chat_id = ?", [id], (photoErr) => {
-    if (photoErr) return res.status(500).json({ error: photoErr.message });
-
-    db.query("DELETE FROM chats WHERE id = ?", [id], (err, result) => {
-      if (err) return res.status(500).json({ error: err.message });
-      res.json({ message: "Chat supprimé !" });
-    });
-  });
+// 🔹 Supprimer un chat
+router.delete("/:id", verifyAdminToken, async (req, res) => {
+  try {
+    await Chat.findByIdAndDelete(req.params.id);
+    res.json({ message: "Chat supprimé" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 module.exports = router;
