@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&family=Nunito:wght@400;600&family=Quicksand:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Grechen+Fuemen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-customGreen: #6baa9c;
+  --color-customOrange: #f4a261;
+  --color-customOrangehover: #b44d3b;
+  --color-customGreenhover: #3e7d73;
+  --color-customRose: #ff8e8e;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-baloo: "Baloo 2", serif;
+  --font-roboto: "Roboto", sans-serif;
+  --font-grechenfuemen: "Grechen Fuemen", serif;
+  --font-nunito: "Nunito", serif;
+}
