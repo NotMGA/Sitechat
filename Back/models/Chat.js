@@ -7,7 +7,7 @@ const chatSchema = new mongoose.Schema({
   age: { type: Number, required: true },
   images: [{ type: String }], // URLs des images
   sexe: { type: String, enum: ["M", "F"], required: true },
-  typeHome: { type: String, enum: ["maison", "appartement"], required: true },
+  typeHome: { type: String, enum: ["Maison", "Appartement"], required: true },
   prixAdoption: { type: Number, required: true },
 });
 
