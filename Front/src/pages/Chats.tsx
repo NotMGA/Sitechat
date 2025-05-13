@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import CardChat from "../components/CardChat";
 import AddForm from "../components/AddForm"; // Import du composant
 import "../index.css";
+import API_BASE_URL from "../config/apiConfig";
 
 interface Chat {
   id: number;
@@ -32,7 +33,7 @@ export default function Chats() {
 
   const fetchChats = () => {
     setLoading(true);
-    fetch("http://localhost:5000/api/chats")
+    fetch(`${API_BASE_URL}/api/chats`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Problème lors de la récupération des chats");

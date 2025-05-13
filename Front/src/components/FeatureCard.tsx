@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "../index.css";
+import API_BASE_URL from "../config/apiConfig";
 
 type Chat = {
   id: number;
@@ -15,7 +16,7 @@ export default function FeatureCard() {
 
   // 🔹 Récupérer les chats depuis l'API
   useEffect(() => {
-    fetch("http://localhost:5000/api/chats") // 🔥 Mets l'URL correcte
+    fetch(`${API_BASE_URL}api/chats`) // 🔥 Mets l'URL correcte
       .then((response) => response.json())
       .then((data) => setChats(data))
       .catch((error) =>

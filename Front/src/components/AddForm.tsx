@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import API_BASE_URL from "../config/apiConfig";
 interface AddFormProps {
   onClose: () => void; // pour fermer la modale après ajout
 }
@@ -52,7 +52,7 @@ export default function AddForm({ onClose }: AddFormProps) {
         return;
       }
 
-      const res = await fetch("http://localhost:5000/api/chats", {
+      const res = await fetch(`${API_BASE_URL}/api/chats`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

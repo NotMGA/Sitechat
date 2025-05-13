@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config/apiConfig";
 interface BtnSuppProps {
   chatId: number;
   chatName: string;
@@ -24,7 +25,7 @@ export default function BtnSupp({
         return;
       }
 
-      const res = await fetch(`http://localhost:5000/api/chats/${chatId}`, {
+      const res = await fetch(`${API_BASE_URL}/api/chats/${chatId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
