@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import FeatureCard from "../components/FeatureCard";
 import CardHome from "../components/CardHome";
 import "../index.css";

@@ -50,7 +50,7 @@ export default function Chats() {
       });
   };
 
-  const handleDeleteChat = async (id: number) => {
+  /**const handleDeleteChat = async (id: number) => {
     if (!window.confirm("Voulez-vous vraiment supprimer ce chat ?")) return;
 
     try {
@@ -66,7 +66,7 @@ export default function Chats() {
     } catch (err) {
       alert(err);
     }
-  };
+  }; */
 
   if (loading) return <p className="text-center text-xl">Chargement...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;

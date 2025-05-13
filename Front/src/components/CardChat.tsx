@@ -46,7 +46,7 @@ export default function CardChat({
       document.body.style.overflow = "auto";
     };
   }, [isOpen]);
-  const handleDelete = async () => {
+  /**const handleDelete = async () => {
     if (!window.confirm(`Voulez-vous vraiment supprimer ${nom} ?`)) return;
 
     try {
@@ -62,7 +62,7 @@ export default function CardChat({
       console.error("Erreur :", err);
       alert("Impossible de supprimer ce chat");
     }
-  };
+  };*/
 
   return (
     <>
