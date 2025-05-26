@@ -2,31 +2,31 @@ import { useState, useEffect } from "react";
 import BtnSupp from "./BtnSupp";
 
 interface ChatProps {
-  id: number;
+  _id: string;
   nom: string;
   image: string;
   age: number;
   sexe: string;
   description: string;
-  photos: string[];
-  type_habitat: string;
-  qualities: string[];
-  prix_adoption: number;
+  images: string[];
+  typeHome: string;
+  qualites: string[];
+  prixAdoption: number;
   veto: string;
 }
 
 export default function CardChat({
-  id,
+  _id,
   nom,
   image,
   age,
   sexe,
   description,
   veto,
-  photos,
-  type_habitat,
-  qualities,
-  prix_adoption,
+  images,
+  typeHome,
+  qualites,
+  prixAdoption,
 }: ChatProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -67,71 +67,64 @@ export default function CardChat({
   return (
     <>
       {/* 📌 Carte normale */}
-      <div
-        className="p-6 rounded-lg  shadow-xl shadow-black/50 
-                  before:absolute before:inset-0 before:rounded-lg 
-                  before:shadow-inner before:shadow-black/20 
-                  after:absolute after:inset-0 after:rounded-lg after:pointer-events-none before:pointer-events-none
-                  after:shadow-[5px_5px_15px_rgba(255,255,255,0.2)] font-nunito bg-customGreen relative "
-      >
-        <img
-          src={image}
-          alt={nom}
-          className="w-40 h-60 object-cover rounded-lg "
-        />
-        <div>
-          <h2 className="text-xl font-bold mt-2 text-white font-baloo">
+      <div className="relative">
+        {isAdmin && (
+          <BtnSupp
+            chatId={_id}
+            chatName={nom}
+            onDeleteSuccess={() => window.location.reload()}
+          />
+        )}
+        <div className="cursor-pointer" onClick={() => setIsOpen(true)}>
+          <img
+            src={images[0]}
+            alt={nom}
+            className=" w-full aspect-square object-cover rounded-lg "
+          />
+
+          <h2 className="text-2xl text-center font-bold mt-3 text-[#4B2E2E]">
             {nom}
           </h2>
-          <p className="text-white">Âge : {age} ans</p>
-          <p className="text-white">Sexe : {sexe} </p>
-
-          <button
-            onClick={() => setIsOpen(true)}
-            className="block bg-blue-500 text-white text-center mt-2 p-2 rounded-md w-full hover:bg-blue-700 scale-105 transition-all duration-300"
-          >
-            Voir plus
-          </button>
-          {isAdmin && (
-            <BtnSupp
-              chatId={id}
-              chatName={nom}
-              onDeleteSuccess={() => window.location.reload()}
-            />
-          )}
+          <div className="flex justify-center gap-4 text-[#9a704c] text-lg mt-1 font-medium ">
+            <p className="text-[#9a704c] "> {age} ans</p>
+            {sexe === "Mâle" ? "♂" : "♀"}
+            <p className="text-[#9a704c]"> </p>
+            {typeHome === "Maison" ? "🏠" : "🏢"}
+            <p></p>
+          </div>
         </div>
       </div>
 
       {/* 📌 Modale avec animation */}
       {isOpen && (
         <div
-          className={`fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-md z-50 transition-opacity duration-300 ${
+          className={`fixed inset-0 flex items-center  justify-center bg-black/30 backdrop-blur-md z-50 transition-opacity duration-300 ${
             isAnimating ? "opacity-100" : "opacity-0"
           }`}
           onClick={() => setIsOpen(false)}
         >
           <div
-            className={`bg-customGreen  border border-gray-300/50 p-6 rounded-xl w-[90%] lg:w-[50%] lg:h-[80vh] shadow-lg flex flex-col lg:flex-row transition-transform duration-300 ${
+            className={`bg-[#FCFAF7]  border border-gray-300/50 p-6 rounded-xl w-[90%] lg:w-[50%]  shadow-lg flex flex-col lg:flex-row transition-transform duration-300 ${
               isAnimating ? "scale-100" : "scale-95"
             }`}
             onClick={(e) => e.stopPropagation()} // Empêche la fermeture si on clique sur la modale
           >
             {/* 🔻 Image à gauche */}
-            <div className="relative w-full lg:w-[45%] h-[50vh] lg:h-full flex items-center justify-center bg-gray-100 rounded-lg overflow-hidden">
+            <div className="relative w-full lg:w-[45%] h-[50vh] self-center lg:h-full flex items-center justify-center bg-gray-100 rounded-lg overflow-hidden font-PlusJakartaSans">
               <img
-                src={photos[currentPhoto]}
-                alt={`${name} - ${currentPhoto + 1}`}
-                className="w-full h-full object-cover"
+                src={images[currentPhoto]}
+                alt={`${nom} - ${currentPhoto + 1}`}
+                className="w-full h-full object-contain"
               />
 
               {/* Flèches de navigation affichées SEULEMENT si plusieurs images */}
-              {photos.length > 1 && (
+              {images.length > 1 && (
                 <>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       setCurrentPhoto((prev) =>
-                        prev === 0 ? photos.length - 1 : prev - 1
+                        prev === 0 ? images.length - 1 : prev - 1
                       );
                     }}
                     className="absolute left-2 bg-black/50 text-white p-2 rounded-full"
@@ -142,7 +135,7 @@ export default function CardChat({
                     onClick={(e) => {
                       e.stopPropagation();
                       setCurrentPhoto((prev) =>
-                        prev === photos.length - 1 ? 0 : prev + 1
+                        prev === images.length - 1 ? 0 : prev + 1
                       );
                     }}
                     className="absolute right-2 bg-black/50 text-white p-2 rounded-full"
@@ -156,32 +149,41 @@ export default function CardChat({
             {/* 🔻 Infos à droite */}
             <div className="flex flex-col p-4 w-full lg:w-[55%] font-nunito text-lg leading-relaxed ">
               <div>
-                <h2 className="text-2xl font-baloo font-bold">{nom}</h2>
-                <p className="mt-2">{description}</p>
-                <p>{veto}</p>
-                {/* 🔻 Détails supplémentaires */}
-                <div className="mt-4 space-y-3">
-                  <p>
-                    <strong>💰 Sexe :</strong> {sexe}
-                  </p>
-                  <p>
-                    <strong>🏡 Habitat :</strong> {type_habitat}
-                  </p>
-                  <p>
-                    {qualities.map((q) => (
-                      <span
-                        key={q}
-                        className="bg-customOrange px-2 py-1 shadow-md rounded-full mx-1 text-white"
-                      >
-                        {q}
-                      </span>
-                    ))}
-                  </p>
-
-                  <p>
-                    <strong>💰 Frais d'adoption :</strong> {prix_adoption}€
-                  </p>
+                <h2 className="text-3xl  font-bold text-center ">{nom}</h2>
+                <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="border-[#ccb9a7] border-1 rounded-lg p-2 mt-2">
+                    <h2 className="font-bold">Qualités</h2>
+                    <p>
+                      {qualites.map((q) => (
+                        <span
+                          key={q}
+                          className="bg-[#F2EDE8] px-2 py-1 shadow-md rounded-full mx-1 text-[#9a704c] "
+                        >
+                          {q}
+                        </span>
+                      ))}
+                    </p>
+                  </div>
+                  <div className="border-[#ccb9a7] border-1 rounded-lg p-2 mt-2">
+                    <h2 className="font-bold">Sexe</h2>
+                    <p className="text-[#9a704c]">{sexe}</p>
+                  </div>
+                  <div className="border-[#ccb9a7] border-1 rounded-lg p-2 mt-2">
+                    <h2 className="font-bold">Veterinaire</h2>
+                    <p className="text-[#9a704c]">{veto}</p>
+                  </div>
+                  <div className="border-[#ccb9a7] border-1 rounded-lg p-2 mt-2">
+                    <h2 className="font-bold">Habitat</h2>
+                    <p className="text-[#9a704c]">{typeHome}</p>
+                  </div>
+                  <div className="border-[#ccb9a7] border-1 rounded-lg p-2 mt-2">
+                    <h2 className="font-bold">Prix adoption</h2>
+                    <p className="text-[#9a704c]">{prixAdoption}€</p>
+                  </div>
                 </div>
+                <h2 className="font-bold mt-5"> Description</h2>
+                <p className="mt-2 text-[#9a704c]">{description}</p>
+                {/* 🔻 Détails supplémentaires */}
               </div>
 
               {/* 🔻 Bouton d'adoption centré et plus petit */}

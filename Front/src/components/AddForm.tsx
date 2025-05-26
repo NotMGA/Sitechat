@@ -42,7 +42,7 @@ export default function AddForm({ onClose }: AddFormProps) {
       sexe,
       typeHome,
       prixAdoption,
-      photos, // tableau
+      images: photos, // tableau
     };
 
     try {
@@ -68,7 +68,6 @@ export default function AddForm({ onClose }: AddFormProps) {
 
       alert("Chat ajouté avec succès !");
       onClose(); // Ferme la modale
-      window.location.reload();
     } catch (err) {
       console.error(err);
       if (err instanceof Error) {
@@ -81,10 +80,10 @@ export default function AddForm({ onClose }: AddFormProps) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-md z-50">
-      <div className="bg-white p-6 rounded-lg w-[90%] max-w-xl shadow-lg relative">
+      <div className=" bg-[#f3ede7] p-6 rounded-lg w-[90%] max-w-xl shadow-lg relative">
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-2"
+          className="absolute top-2 right-2  text-white rounded-full p-2"
         >
           ❌
         </button>
@@ -96,17 +95,17 @@ export default function AddForm({ onClose }: AddFormProps) {
             <input
               value={nom}
               onChange={(e) => setNom(e.target.value)}
-              className="w-full border p-2"
+              className="w-full border border-[#ccb9a7] p-2 rounded-lg "
               required
             />
           </div>
 
           <div>
-            <label className="block font-semibold">Description :</label>
+            <label className="block font-semibold ">Description :</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full border p-2"
+              className="w-full border border-[#ccb9a7] p-2 rounded-lg"
               required
             />
           </div>
@@ -117,7 +116,7 @@ export default function AddForm({ onClose }: AddFormProps) {
               type="number"
               value={age}
               onChange={(e) => setAge(Number(e.target.value))}
-              className="w-full border p-2"
+              className="w-full border border-[#ccb9a7] p-2 rounded-lg"
               required
             />
           </div>
@@ -127,7 +126,7 @@ export default function AddForm({ onClose }: AddFormProps) {
             <select
               value={sexe}
               onChange={(e) => setSexe(e.target.value)}
-              className="w-full border p-2"
+              className="w-full border border-[#ccb9a7] p-2 rounded-lg"
             >
               <option value={"M"}>Mâle</option>
               <option value={"F"}>Femelle</option>
@@ -139,7 +138,7 @@ export default function AddForm({ onClose }: AddFormProps) {
             <select
               value={typeHome}
               onChange={(e) => setTypeHabitat(e.target.value)}
-              className="w-full border p-2"
+              className="w-full border border-[#ccb9a7] p-2 rounded-lg"
             >
               <option>Appartement</option>
               <option>Maison</option>
@@ -148,16 +147,16 @@ export default function AddForm({ onClose }: AddFormProps) {
 
           <div>
             <label className="block font-semibold">Qualités :</label>
-            <div className="flex gap-2">
+            <div className="flex gap-2 rounded-lg">
               <input
                 value={currentQualite}
                 onChange={(e) => setCurrentQualite(e.target.value)}
-                className="flex-1 border p-2"
+                className="flex-1 border border-[#ccb9a7] p-2 rounded-lg"
               />
               <button
                 type="button"
                 onClick={handleAddQualite}
-                className="bg-green-600 text-white px-4 py-2"
+                className="bg-green-600 text-white px-4 py-2 rounded-full"
               >
                 +
               </button>
@@ -177,21 +176,24 @@ export default function AddForm({ onClose }: AddFormProps) {
               <input
                 value={currentPhoto}
                 onChange={(e) => setCurrentPhoto(e.target.value)}
-                className="flex-1 border p-2"
+                className="flex-1 border border-[#ccb9a7] p-2 rounded-lg"
               />
               <button
                 type="button"
                 onClick={handleAddPhoto}
-                className="bg-blue-600 text-white px-4 py-2"
+                className="bg-blue-600 text-white px-4 py-2 rounded-full"
               >
                 +
               </button>
             </div>
-            <div className="mt-2">
-              {photos.map((url, i) => (
-                <p key={i} className="text-sm">
-                  {url}
-                </p>
+            <div className="mt-2 flex gap-2 flex-wrap">
+              {photos.map((_, i) => (
+                <span
+                  key={i}
+                  className="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700"
+                >
+                  Image {i + 1}
+                </span>
               ))}
             </div>
           </div>
@@ -202,7 +204,7 @@ export default function AddForm({ onClose }: AddFormProps) {
               type="number"
               value={prixAdoption}
               onChange={(e) => setPrixAdoption(Number(e.target.value))}
-              className="w-full border p-2"
+              className="w-full border border-[#ccb9a7] p-2 rounded-lg"
               required
             />
           </div>
@@ -210,7 +212,7 @@ export default function AddForm({ onClose }: AddFormProps) {
           <div className="text-center">
             <button
               type="submit"
-              className="bg-green-500 text-white px-6 py-2 rounded"
+              className="bg-green-500 text-white px-6 py-2 rounded-lg"
             >
               Valider
             </button>

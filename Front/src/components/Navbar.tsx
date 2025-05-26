@@ -1,28 +1,49 @@
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom"; // N'oublie pas d'importer Link
 
-export default function Navbar() {
+const Navbar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
   return (
-    <nav className="fixed top-2 left-1/2 transform -translate-x-1/2 bg-[#F3DFBD] text-gray-900 max-w-3xl rounded-full shadow-md z-50   flex items-center w-auto">
-      {/* Titre avec fond bleu collé aux liens */}
-      <h1 className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm flex items-center">
-        🐱 Arche de Néo
-      </h1>
+    <nav className="w-full border-b border-[#E5E8EB] bg-[#FCFAF7] text-[#1b140d] ">
+      <div className=" mx-auto px-4 py-3 flex items-center justify-between">
+        {/* Logo */}
+        <div className="text-2xl font-bold">L'Arche de Néo</div>
 
-      {/* Liens de navigation directement à côté du titre */}
-      <div className="flex space-x-4 text-sm ml-4 px-5">
-        <Link to="/" className="hover:text-blue-600 transition">
-          Accueil
-        </Link>
-        <Link to="/chats" className="hover:text-blue-600 transition">
-          Chats à adopter
-        </Link>
-        <Link to="/contact" className="hover:text-blue-600 transition">
-          Contact
-        </Link>
-        <Link to="/admin" className="hover:text-blue-600 transition">
-          Admin
-        </Link>
+        {/* Desktop links */}
+        <ul className="hidden md:flex gap-6 font-medium">
+          <li className="hover:text-[#9a704c] cursor-pointer">
+            <Link to="/">Accueil</Link>
+          </li>
+          <li className="hover:text-[#9a704c] cursor-pointer">
+            <Link to="/chats">Adoption</Link> {}
+          </li>
+          <li className="hover:text-[#9a704c] cursor-pointer">Actualités</li>
+          <li className="hover:text-[#9a704c] cursor-pointer">Contact</li>
+        </ul>
+
+        {/* Mobile burger icon */}
+        <div className="md:hidden">
+          <button onClick={toggleMenu}>
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile menu */}
+      {isOpen && (
+        <ul className="md:hidden flex flex-col text-xl gap-4 px-6 pb-4 font-medium bg-[#f3ede7]">
+          <li className="hover:text-[#9a704c] cursor-pointer">Accueil</li>
+          <li className="hover:text-[#9a704c] cursor-pointer">Adoption</li>
+          <li className="hover:text-[#9a704c] cursor-pointer">Actualités</li>
+          <li className="hover:text-[#9a704c] cursor-pointer">Contact</li>
+        </ul>
+      )}
     </nav>
   );
-}
+};
+
+export default Navbar;

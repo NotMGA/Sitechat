@@ -3,18 +3,19 @@ import CardChat from "../components/CardChat";
 import AddForm from "../components/AddForm"; // Import du composant
 import "../index.css";
 import API_BASE_URL from "../config/apiConfig";
+import ImageBox from "../components/boximg";
 
 interface Chat {
-  id: number;
+  _id: string;
   nom: string;
   image: string;
   age: number;
   sexe: string;
   description: string;
-  photos: string[];
-  type_habitat: string;
-  qualities: string[];
-  prix_adoption: number;
+  images: string[];
+  typeHome: string;
+  qualites: string[];
+  prixAdoption: number;
   veto: string;
 }
 
@@ -71,25 +72,29 @@ export default function Chats() {
 
   if (loading) return <p className="text-center text-xl">Chargement...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
+  console.log(chats);
 
   return (
-    <div className="pt-10 flex flex-col items-center min-h-screen bg-gradient-to-b from-[#FFB085] to-[#FFD3B6] text-gray-800 p-[5%]">
-      <h1 className="text-3xl font-bold text-center text-blue-600">
-        Chats à adopter
-      </h1>
-
-      {isAdmin && (
-        <button
-          className="mt-4 px-4 py-2 bg-green-500 text-white rounded"
-          onClick={() => setShowAddForm(true)} // ✅ Ouvre la modale d'ajout
-        >
-          + Ajouter un chat
-        </button>
-      )}
+    <div className="pt-10 pb-10 flex flex-col  min-h-screen bg-[#FCFAF7]  text-gray-800 px-[15%] font-PlusJakartaSans">
+      <ImageBox
+        image="https://www.assuropoil.fr/wp-content/uploads/2023/07/avoir-un-chat-sante.jpg"
+        title="Adoptez un chat !"
+      ></ImageBox>
+      <div className="flex  items-center justify-between mt-6">
+        <h2 className="text-3xl font-bold "> Nos chats a adopter</h2>
+        {isAdmin && (
+          <button
+            className="mt-4 px-4 py-2 bg-green-500 text-white rounded"
+            onClick={() => setShowAddForm(true)} // ✅ Ouvre la modale d'ajout
+          >
+            + Ajouter un chat
+          </button>
+        )}
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-20 mt-6">
         {chats.map((chat) => (
-          <CardChat key={chat.id} {...chat} />
+          <CardChat key={chat._id} {...chat} />
         ))}
       </div>
 

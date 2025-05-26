@@ -1,49 +1,58 @@
-import FeatureCard from "../components/FeatureCard";
-import CardHome from "../components/CardHome";
 import "../index.css";
+import ImageBox from "../components/boximg";
+import ActualiteCard from "../components/actured";
+import ActionsBox from "../components/actionsbox";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center  min-h-screen bg-gradient-to-b from-[#FFB085] to-[#FFD3B6] text-gray-800 p p-[5%] pt-0">
+    <div className="flex p-50 font-PlusJakartaSans flex-col items-center  min-h-screen bg-[#FCFAF7] text-gray-800 px-[15%]  pt-0">
       {/* Bannière */}
-      <h1 className=" font-baloo text-5xl font-bold text-[#12074d] mt-15  bg-opacity-50  py-3 rounded-lg">
-        Bienvenue à l'arche de neo 🐱
-      </h1>
-      <FeatureCard />
+      <ImageBox
+        title="Savons enssemble les chats abandonnés"
+        buttonLabel="Faire un don"
+        onClick={() => alert("Merci pour votre soutien !")}
+        image="https://www.assuropoil.fr/wp-content/uploads/2023/07/avoir-un-chat-sante.jpg"
+      ></ImageBox>
       {/* Section Infos */}
-      <div className="container mx-auto mt-15 grid grid-cols-1 md:grid-cols-3 gap-12 px-6">
-        <CardHome
-          titre="🐾 100+ Adoptions"
-          color="customGreen"
-          children=" Nous avons trouvé des familles pour plus de 100 chats cette année."
+      <div className="flex flex-between  flex-col mt-10 w-full">
+        <h2 className="text font-bold text-3xl">Dernieres actualités</h2>
+        <ActualiteCard
+          date="23 mars 2023"
+          title="Adoption de chatons à l'Arche de Néo"
+          description="Vous cherchez un compagnon pour la vie ? Venez adopter un de nos chatons !"
+          image="https://cdn.usegalileo.ai/replicate/9f0b67ba-7fa4-4b9d-821f-a8f736c0251e.png"
         />
-        <CardHome
-          titre="🏡 Familles heureuses"
-          color="customRose"
-          children="Nos adoptants sont ravis de leur compagnon à quatre pattes."
+        <ActualiteCard
+          date="23 mars 2023"
+          title="Adoption de chatons à l'Arche de Néo"
+          description="Vous cherchez un compagnon pour la vie ? Venez adopter un de nos chatons !"
+          image="https://cdn.usegalileo.ai/replicate/9f0b67ba-7fa4-4b9d-821f-a8f736c0251e.png"
         />
-        <CardHome
-          titre="❤️ Soutenez-nous"
-          color="customGreen"
-          children="Aidez-nous à sauver plus de chats en faisant un don ou en devenant
-            bénévole."
-        />
-        <CardHome
-          titre="🐾 Contactez-nous"
-          color="customGreen"
-          children=" Nous pouvons repondre a toutes vos questiions."
-        />
-
-        <CardHome
-          titre="🏡 Histoire de l asso "
-          color="customRose"
-          children="Venez en apprendre plus sur l hisoitre de notre asso"
-        />
-        <CardHome
-          titre="🐾 Dernier chat adopter "
-          color="customGreen"
-          children=" voila le dernier chat adopter  "
-        />
+      </div>
+      <div>
+        <h2 className="text font-bold text-3xl mt-10">Nos actions</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+          <ActionsBox
+            image="https://cdn.usegalileo.ai/replicate/9f0b67ba-7fa4-4b9d-821f-a8f736c0251e.png"
+            title="Adopter"
+            description="Venez adopter un chaton ou un chat adulte"
+          />
+          <ActionsBox
+            image="https://cdn.usegalileo.ai/replicate/9f0b67ba-7fa4-4b9d-821f-a8f736c0251e.png"
+            title="Agir"
+            description="Participtez a nos actions de terrain "
+          />
+          <ActionsBox
+            image="https://cdn.usegalileo.ai/replicate/9f0b67ba-7fa4-4b9d-821f-a8f736c0251e.png"
+            title="Sensibiliser "
+            description="Organisez des journee de sensibilisation dans votre ville"
+          />
+          <ActionsBox
+            image="https://cdn.usegalileo.ai/replicate/9f0b67ba-7fa4-4b9d-821f-a8f736c0251e.png"
+            title="Soigner"
+            description="Aidez-nous a soigner les chats maltraites ou abandonnes "
+          />
+        </div>
       </div>
     </div>
   );

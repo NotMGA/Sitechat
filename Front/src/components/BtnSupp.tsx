@@ -1,6 +1,6 @@
 import API_BASE_URL from "../config/apiConfig";
 interface BtnSuppProps {
-  chatId: number;
+  chatId: string;
   chatName: string;
   onDeleteSuccess: () => void;
 }
@@ -48,7 +48,7 @@ export default function BtnSupp({
   return (
     <button
       onClick={handleDelete}
-      className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded-full text-sm hover:bg-red-800 transition-all"
+      className=" absolute top-2 left-2    text-white px-2 py-1 rounded-full text-sm hover:bg-red-800 transition-all"
     >
       ❌
     </button>
