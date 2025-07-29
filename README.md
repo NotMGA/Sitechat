@@ -19,12 +19,11 @@ Il permet à une association de publier des fiches de chats, de recevoir des dem
 - **Langage** : Node.js
 - **Framework** : Express.js
 - **Authentification** : JWT (admins uniquement)
-- **Base de données** : PostgreSQL via Prisma
+- **Base de données** : PostgreSQL 
 - **Déploiement** : Railway.app
 
 ### Base de Données
 - **Type** : PostgreSQL
-- **ORM** : Prisma
 - **Hébergement** : Neon.tech (plan gratuit)
 
 ### Outils Supplémentaires
@@ -69,7 +68,7 @@ Il permet à une association de publier des fiches de chats, de recevoir des dem
   - Authentification des admins
 - Middleware de vérification de token admin
 
-### Base de données (PostgreSQL via Prisma)
+### Base de données (PostgreSQL)
 - Modèle Chat, Admin
 - Gestion d’images sous forme de tableau de string
 
