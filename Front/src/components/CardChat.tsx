@@ -4,7 +4,6 @@ import BtnSupp from "./BtnSupp";
 interface ChatProps {
   _id: string;
   nom: string;
-  image: string;
   age: number;
   sexe: string;
   description: string;
@@ -18,7 +17,6 @@ interface ChatProps {
 export default function CardChat({
   _id,
   nom,
-  image,
   age,
   sexe,
   description,
