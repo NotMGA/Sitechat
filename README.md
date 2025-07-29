@@ -20,11 +20,11 @@ Il permet à une association de publier des fiches de chats, de recevoir des dem
 - **Framework** : Express.js
 - **Authentification** : JWT (admins uniquement)
 - **Base de données** : PostgreSQL 
-- **Déploiement** : Railway.app
+- **Déploiement** : Render
 
 ### Base de Données
 - **Type** : PostgreSQL
-- **Hébergement** : Neon.tech (plan gratuit)
+- **Hébergement** : Mango (plan gratuit)
 
 ### Outils Supplémentaires
 - **API Client** : Axios
@@ -88,9 +88,9 @@ Il permet à une association de publier des fiches de chats, de recevoir des dem
 | Composant      | Plateforme      | Coût         |
 |----------------|-----------------|--------------|
 | Front-end      | Vercel          | 0€           |
-| Back-end       | Railway.app     | 0€ (gratuit) |
-| Base de données| Neon.tech       | 0€           |
-| Nom de domaine | Freenom/Porkbun | 0€ - 10€/an  |
+| Back-end       | Render          | 0€ (gratuit) |
+| Base de données| mango           | 0€           |
+| Nom de domaine | Freenom         | 0€ - 10€/an  |
 
 > 🎁 Possibilité de tout centraliser sur Render.com si besoin (plan gratuit pour Front + API + DB).
 
@@ -122,6 +122,15 @@ DATABASE_URL=postgresql://...
 ```
 
 ---
+
+## 8.5 connexion et lien vercel 
+ Lien : https://sitechat.vercel.app
+
+ Lien admin : https://sitechat.vercel.app/admin
+{
+  "email": "admin@example.com",
+  "password": "admin"
+}
 
 ## 9. ✅ À venir
 
